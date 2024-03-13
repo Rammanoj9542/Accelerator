@@ -1,0 +1,16 @@
+fastapi==0.103.1
+langchain==0.0.267
+huggingface_hub
+faiss-cpu
+urllib3==1.26.6
+accelerate
+python-dotenv==1.0.0
+PyYAML==6.0.1
+uvicorn==0.23.2
+Werkzeug==2.3.6
+utils
+tiktoken
+slowapi
+pymongo
+cachetools
+logger

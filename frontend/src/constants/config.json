@@ -1,0 +1,40 @@
+{
+    "LogoSource": "/Brillius_technologies.png",
+    "LogoAlt": "Brillius Technologies",
+    "LogoWidth": "70%",
+    "Login": {
+        "Heading": "AI Accelerators"
+    },
+    "Userhome": {
+        "Heading": "User Homepage"
+    },
+    "AdminHome": {
+        "Heading": "Admin Homepage"
+    },
+    "SuperadminHome": {
+        "Heading": "Superadmin Homepage"
+    },
+    "PasswordReset": {
+        "Heading": "Password Reset"
+    },
+    "UserAccount": {
+        "Heading": "My Account"
+    },
+    "UserRegistration": {
+        "Heading": "User Registration"
+    },
+    "AdminRegistration": {
+        "Heading": "Admin Registration"
+    },
+    "STT": {
+        "Heading": "STT"
+    },
+    "LLM": {
+        "Heading": "LLM"
+    },
+    "RAG": {
+        "Heading": "RAG Ingest"
+    },
+    "RAG_API_URL": "192.168.165.127:8000",
+    "RAG_Archive": true
+}

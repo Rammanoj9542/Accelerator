@@ -1,0 +1,5 @@
+# Prod
+# db_url: mongodb://172.31.32.67:27017/
+
+# Development
+db_url: mongodb://172.25.1.179:27017/

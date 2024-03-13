@@ -1,0 +1,146 @@
+version: '3'
+services:
+  server:
+    build:
+      context: ./backend/server # Path to the directory containing the Python app
+      dockerfile: Dockerfile # Specify the Python Dockerfile
+    ports:
+      - "4001:4001" # Map the container's port 4001 to the host's port 4001
+    volumes:
+      - ./backend/server:/app # Mount the current directory into the /app directory in the container
+      - /home/ubuntu/ai-tutor-bucket/platform/backend/server/logs:/server/logs
+      #networks:
+      #- myapp-network  # Connect to a custom network
+
+  llm_openai_cloud:
+    build:
+      context: ./backend/llm_openai_cloud # Path to the directory containing the Python app
+      dockerfile: Dockerfile # Specify the Python Dockerfile
+    environment:
+      - Brillius_Api_Key=${Brillius_Api_Key}
+      - Lang_Tutor=${Brillius_Api_Key}
+    ports:
+      - "6002:6002" # Map the container's port 6002 to the host's port 6002
+    volumes:
+      - ./backend/llm_openai_cloud:/app # Mount the current directory into the /app directory in the container
+      - /home/ubuntu/ai-tutor-bucket/platform/backend/llm_openai_cloud/logs:/llm_openai_cloud/logs
+      #networks:
+      #- myapp-network  # Connect to a custom network
+
+  llm_hf_gguf_local:
+    build:
+      context: ./backend/llm_hf_gguf_local # Path to the directory containing the Python app
+      dockerfile: Dockerfile # Specify the Python Dockerfile
+    ports:
+      - "6003:6003" # Map the container's port 6003 to the host's port 6003
+    volumes:
+      - ./backend/llm_hf_gguf_local:/app # Mount the current directory into the /app directory in the container
+      - /home/ubuntu/ai-tutor-bucket/platform/backend/llm_hf_gguf_local/logs:/llm_hf_gguf_local/logs
+      #networks:
+      #- myapp-network  # Connect to a custom network
+
+  llm_hf_gptq_local:
+    build:
+      context: ./backend/llm_hf_gptq_local # Path to the directory containing the Python app
+      dockerfile: Dockerfile # Specify the Python Dockerfile
+    ports:
+      - "6004:6004" # Map the container's port 6004 to the host's port 6004
+    volumes:
+      - ./backend/llm_hf_gptq_local:/app # Mount the current directory into the /app directory in the container
+      - /home/ubuntu/ai-tutor-bucket/platform/backend/llm_hf_gptq_local/logs:/llm_hf_gptq_local/logs
+      #networks:
+      #- myapp-network  # Connect to a custom network
+
+  stt_wispher:
+    build:
+      context: ./backend/stt_wispher # Path to the directory containing the Python app
+      dockerfile: Dockerfile # Specify the Python Dockerfile
+    ports:
+      - "5004:5004" # Map the container's port 5004 to the host's port 5004
+    volumes:
+      - ./backend/stt_wispher:/app # Mount the current directory into the /app directory in the container
+      - /home/ubuntu/ai-tutor-bucket/data:/data
+      - /home/ubuntu/ai-tutor-bucket/platform/backend/stt_wispher/logs:/stt_wispher/logs
+      #networks:
+      #- myapp-network  # Connect to a custom network
+
+  stt_openai_cpu_local:
+    build:
+      context: ./backend/stt_openai_cpu_local # Path to the directory containing the Python app
+      dockerfile: Dockerfile # Specify the Python Dockerfile
+    ports:
+      - "5005:5005" # Map the container's port 5005 to the host's port 5005
+    volumes:
+      - ./backend/stt_openai_cpu_local:/app # Mount the current directory into the /app directory in the container
+      - /home/ubuntu/ai-tutor-bucket/data:/data
+      - /home/ubuntu/ai-tutor-bucket/platform/backend/stt_openai_cpu_local/logs:/stt_openai_cpu_local/logs
+      #networks:
+      #- myapp-network  # Connect to a custom network
+
+  stt_openai_gpu_local:
+    build:
+      context: ./backend/stt_openai_gpu_local # Path to the directory containing the Python app
+      dockerfile: Dockerfile # Specify the Python Dockerfile
+    ports:
+      - "5006:5006" # Map the container's port 5006 to the host's port 5006
+    volumes:
+      - ./backend/stt_openai_gpu_local:/app # Mount the current directory into the /app directory in the container
+      - /home/ubuntu/ai-tutor-bucket/data:/data
+      - /home/ubuntu/ai-tutor-bucket/platform/backend/stt_openai_gpu_local/logs:/stt_openai_gpu_local/logs
+      #networks:
+      #- myapp-network  # Connect to a custom network
+
+  rag_ingest:
+    build:
+      context: ./backend/rag_ingest # Path to the directory containing the Python app
+      dockerfile: Dockerfile # Specify the Python Dockerfile
+    ports:
+      - "7001:7001" # Map the container's port 5006 to the host's port 5006
+    volumes:
+      - ./backend/rag_ingest:/app # Mount the current directory into the /app directory in the container
+      - /home/ubuntu/ai-tutor-bucket/data:/data
+      - /home/ubuntu/ai-tutor-bucket/EmbeddingModels:/EmbeddingModels
+      - /home/ubuntu/ai-tutor-bucket/platform/backend/rag_ingest/logs:/rag_ingest/logs
+      #networks:
+      #- myapp-network  # Connect to a custom network
+
+  rag_retrival:
+    build:
+      context: ./backend/rag_retrival # Path to the directory containing the Python app
+      dockerfile: Dockerfile # Specify the Python Dockerfile
+    environment:
+      - Brillius_Api_Key=${Brillius_Api_Key}
+      - Lang_Tutor=${Brillius_Api_Key}
+    ports:
+      - "7002:7002" # Map the container's port 5006 to the host's port 5006
+    volumes:
+      - ./backend/rag_retrival:/app # Mount the current directory into the /app directory in the container
+      - /home/ubuntu/ai-tutor-bucket/data:/data
+      - /home/ubuntu/ai-tutor-bucket/EmbeddingModels:/EmbeddingModels
+      - /home/ubuntu/ai-tutor-bucket/platform/backend/rag_retrival/logs:/rag_retrival/logs
+      #networks:
+      #- myapp-network  # Connect to a custom network
+
+  frontend:
+    build:
+      context: ./frontend # Path to the directory containing the Node.js UI app
+      dockerfile: Dockerfile # Specify the Node.js Dockerfile
+    ports:
+      - "3001:3001" # Map the container's port 30001 to the host's port 30001
+    volumes:
+      - ./frontend:/app
+      - /home/ubuntu/ai-tutor-bucket/platform/frontend/logs:/frontend/logs
+
+  mongo:
+    image: mongo:latest
+    container_name: my-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - /home/ubuntu/ai-tutor-db/platform/db/mongo-data:/db/mongo-data
+      - /home/ubuntu/ai-tutor-db/platform/db/mongo-config:/db/mongo-config
+      #networks:
+      #- myapp-network  # Connect to a custom network
+
+      #networks:
+      #- myapp-network:  # Connect to a custom network

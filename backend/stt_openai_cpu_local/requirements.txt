@@ -1,0 +1,9 @@
+fastapi==0.103.1
+uvicorn==0.23.2
+slowapi
+pymongo
+PyYAML==6.0.1
+logger
+cachetools
+accelerate
+transformers==4.31.0
